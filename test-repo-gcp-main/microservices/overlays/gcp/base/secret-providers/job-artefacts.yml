@@ -14,5 +14,5 @@ spec:
           key: job-artefacts
   parameters:
     secrets: |
-      - resourceName: "projects/712105902807/job-artefacts/versions/latest"
+      - resourceName: "projects/1011757057153/job-artefacts/versions/latest"
         fileName: "job-artefacts"
