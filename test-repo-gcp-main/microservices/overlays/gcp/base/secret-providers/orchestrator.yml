@@ -14,5 +14,5 @@ spec:
           key: orchestrator
   parameters:
     secrets: |
-      - resourceName: "projects/712105902807/orchestrator/versions/latest"
+      - resourceName: "projects/1011757057153/orchestrator/versions/latest"
         fileName: "orchestrator"
