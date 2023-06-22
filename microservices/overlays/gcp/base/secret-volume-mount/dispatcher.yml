@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dispatcher
+spec:
+  template:
+    spec:
+      containers:
+        - name: dispatcher
+          envFrom:
+            - secretRef:
+                name: dispatcher
+          volumeMounts:
+            - name: dispatcher-volumes
+              mountPath: "/opt/code/.env"
+              subPath: ".env"
+              readOnly: true
+      volumes:
+        - name: dispatcher-volumes
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "dispatcher-secret-provider-class"

@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logistics
+spec:
+  template:
+    spec:
+      containers:
+        - name: logistics
+          volumeMounts:
+            - name: logistics-volumes
+              mountPath: "/root/.env"
+              subPath: ".env"
+              readOnly: true
+          envFrom:
+            - secretRef:
+                name: logistics
+      volumes:
+        - name: logistics-volumes
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "logistics-secret-provider"

@@ -1,0 +1,18 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: steward-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: gcp
+  secretObjects:
+    - secretName: steward
+      type: Opaque
+      data:
+        - objectName: .env
+          key: steward
+  parameters:
+    secrets: |
+      - resourceName: "projects/1011757057153/secrets/steward/versions/latest"
+        fileName: ".env"

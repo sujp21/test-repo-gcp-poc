@@ -1,0 +1,41 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- reloader.yml
+- dispatcher.yml
+- reception.yml
+- orchestrator.yml
+- steward.yml
+- vault.yml
+- logistics.yml
+- lns.yml
+- job-artefacts.yml
+- api-ingress.yml
+
+namespace: hyperexecute
+
+images:
+- name: dispatcher
+  newName: hyperexecuteonprem.azurecr.io/dispatcher
+  newTag: ee11c2b0d5becb670d2ab81736659b4d79af4672
+- name: job-artefacts
+  newName: hyperexecuteonprem.azurecr.io/job-artefacts
+  newTag: 9be55bbbb32eb74bf0e75b0a9c48e95ae5bc0a42
+- name: logistics
+  newName: hyperexecuteonprem.azurecr.io/logistics
+  newTag: 201d2d459e80484999cdb28bcb97e382de83a5bb
+- name: lns
+  newName: hyperexecuteonprem.azurecr.io/lns
+  newTag: 879126708622771293d96c3d5159df56216fd4d4
+- name: orchestrator
+  newName: hyperexecuteonprem.azurecr.io/orchestrator
+  newTag: a427363ad15179ecf008ecbddc33a9d5629c86c7
+- name: reception
+  newName: hyperexecuteonprem.azurecr.io/reception
+  newTag: d979fd318222b4b041a29c2aff68aaa8fad971dc
+- name: steward
+  newName: hyperexecuteonprem.azurecr.io/steward
+  newTag: 008a53eea20be1e3b19173ae59dcd12f119df79f
+- name: vault
+  newName: hyperexecuteonprem.azurecr.io/vault
+  newTag: 25ad1dd04c92d522ce5fd505bec9043fedbdaa62

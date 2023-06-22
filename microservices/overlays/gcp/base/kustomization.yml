@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - "../../../base"
+  - "./secret-providers"
+
+patchesStrategicMerge:
+  - secret-volume-mount/dispatcher.yml
+  - secret-volume-mount/reception.yml
+  - secret-volume-mount/orchestrator.yml
+  - secret-volume-mount/steward.yml
+  - secret-volume-mount/vault.yml
+  - secret-volume-mount/logistics.yml
+  - secret-volume-mount/lns.yml
+  - secret-volume-mount/job-artefacts.yml
+
+patches:
+- path: deployment_patches/toleration_patch.yml
+  target:
+    kind: Deployment
+- path: deployment_patches/affinity_patch.yml
+  target:
+    kind: Deployment

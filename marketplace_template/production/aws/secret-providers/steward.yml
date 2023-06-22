@@ -1,0 +1,85 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: steward-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: aws
+  secretObjects:
+    - secretName: steward-secrets
+      type: Opaque
+      data:
+        - objectName: SENTINEL_BEARER_TOKEN
+          key: BEARER_TOKEN
+        - objectName: STEWARD_DEPLOYMENT_ENV
+          key: DEPLOYMENT_ENV
+        - objectName: STEWARD_ENABLE_ORPHAN_WINDOW_DELETION
+          key: ENABLE_ORPHAN_WINDOW_DELETION
+        - objectName: STEWARD_ENV
+          key: ENV
+        - objectName: STEWARD_MLD_VERBOSE
+          key: MLD_PLATFORM
+        - objectName: STEWARD_MLD_PLATFORM
+          key: MLD_VERBOSE
+        - objectName: STEWARD_SENTINEL_HOST
+          key: SENTINEL_HOST
+        - objectName: STEWARD_VM_DELETION_CALLBACK_QUEUE
+          key: VM_DELETION_CALLBACK_QUEUE
+        - objectName: STEWARD_MLD_POOL
+          key: MLD_POOL
+        - objectName: STEWARD_MLD_ForemanPingRetries
+          key: MLD_ForemanPingRetries
+        - objectName: STEWARD_MLD_WINDOWSINFRA
+          key: MLD_WINDOWSINFRA
+        - objectName: STEWARD_AWS_DEFAULT_REGION
+          key: AWS_DEFAULT_REGION
+        - objectName: STEWARD_ENABLE_TASK_RESCHEDULER
+          key: ENABLE_TASK_RESCHEDULER
+        - objectName: STEWARD_ORCHESTRATOR_HOST
+          key: ORCHESTRATOR_HOST
+        - objectName: STEWARD_AWSAutoScalingGroups
+          key: AWSAutoScalingGroups
+        - objectName: STEWARD_MLD_WINDOWS_ORPAHN_VM_DELETION_CRON_SPEC
+          key: MLD_WINDOWS_ORPAHN_VM_DELETION_CRON_SPEC
+        - objectName: STEWARD_MLD_IS_ONPREM_ENABLED
+          key: MLD_IS_ONPREM_ENABLED
+  parameters:
+    objects:  |
+      - objectName: template-sm-name
+        objectType: "secretsmanager"
+        jmesPath:
+        - path: SENTINEL_BEARER_TOKEN
+          objectAlias: SENTINEL_BEARER_TOKEN
+        - path: STEWARD_DEPLOYMENT_ENV
+          objectAlias: STEWARD_DEPLOYMENT_ENV
+        - path: STEWARD_ENABLE_ORPHAN_WINDOW_DELETION
+          objectAlias: STEWARD_ENABLE_ORPHAN_WINDOW_DELETION
+        - path: STEWARD_ENV
+          objectAlias: STEWARD_ENV
+        - path: STEWARD_MLD_VERBOSE
+          objectAlias: STEWARD_MLD_VERBOSE
+        - path: STEWARD_MLD_PLATFORM
+          objectAlias: STEWARD_MLD_PLATFORM
+        - path: STEWARD_SENTINEL_HOST
+          objectAlias: STEWARD_SENTINEL_HOST
+        - path: STEWARD_VM_DELETION_CALLBACK_QUEUE
+          objectAlias: STEWARD_VM_DELETION_CALLBACK_QUEUE
+        - path: STEWARD_MLD_ForemanPingRetries
+          objectAlias: STEWARD_MLD_ForemanPingRetries
+        - path: STEWARD_MLD_POOL
+          objectAlias: STEWARD_MLD_POOL
+        - path: STEWARD_MLD_WINDOWSINFRA
+          objectAlias: STEWARD_MLD_WINDOWSINFRA
+        - path: STEWARD_AWS_DEFAULT_REGION
+          objectAlias: STEWARD_AWS_DEFAULT_REGION
+        - path: STEWARD_ENABLE_TASK_RESCHEDULER
+          objectAlias: STEWARD_ENABLE_TASK_RESCHEDULER
+        - path: STEWARD_ORCHESTRATOR_HOST
+          objectAlias: STEWARD_ORCHESTRATOR_HOST
+        - path: STEWARD_AWSAutoScalingGroups
+          objectAlias: STEWARD_AWSAutoScalingGroups
+        - path: STEWARD_MLD_WINDOWS_ORPAHN_VM_DELETION_CRON_SPEC
+          objectAlias: STEWARD_MLD_WINDOWS_ORPAHN_VM_DELETION_CRON_SPEC
+        - path: STEWARD_MLD_IS_ONPREM_ENABLED
+          objectAlias: STEWARD_MLD_IS_ONPREM_ENABLED

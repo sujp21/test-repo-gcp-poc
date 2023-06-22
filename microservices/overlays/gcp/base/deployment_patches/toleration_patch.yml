@@ -1,0 +1,12 @@
+apiVersion: "apps/v1"
+kind: Deployment
+metadata:
+  name: hyperexecute-toleration
+spec:
+  template:
+    spec:
+      tolerations:
+      - key: "application-pool"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"

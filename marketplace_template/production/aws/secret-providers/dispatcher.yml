@@ -1,0 +1,77 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: dispatcher-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: aws
+  secretObjects:
+    - secretName: dispatcher-secrets
+      type: Opaque
+      data:
+        - objectName: DISPATCHER_BILLING_PLAN_LINK
+          key: BILLING_PLAN_LINK
+        - objectName: DISPATCHER_DEPLOYMENT_ENV
+          key: DEPLOYMENT_ENV
+        - objectName: DISPATCHER_LUMS_HOST
+          key: LUMS_HOST
+        - objectName: DISPATCHER_Platform
+          key: Platform
+        - objectName: DISPATCHER_MAC_QUEUE
+          key: MAC_QUEUE
+        - objectName: DISPATCHER_REDIS_HOST
+          key: REDIS_HOST
+        - objectName: DISPATCHER_REDIS_PORT
+          key: REDIS_PORT
+        - objectName: DISPATCHER_SENTINEL_HOST
+          key: SENTINEL_HOST
+        - objectName: DISPATCHER_TASK_COMPLETION_CALLBACK_QUEUE
+          key: TASK_COMPLETION_CALLBACK_QUEUE
+        - objectName: DISPATCHER_AWS_ONPREM
+          key: AWS_ONPREM
+        - objectName: DISPATCHER_CLOUD_PROVIDER
+          key: CLOUD_PROVIDER
+        - objectName: DISPATCHER_SQS_BASE_URL
+          key: SQS_BASE_URL
+        - objectName: DISPATCHER_ORCHESTRATOR_HOST
+          key: ORCHESTRATOR_HOST
+        - objectName: DISPATCHER_AWS_ON_PREM_BUCKET
+          key: AWS_ON_PREM_BUCKET
+        - objectName: DISPATCHER_AWS_DEFAULT_REGION
+          key: AWS_DEFAULT_REGION
+  parameters:
+    objects:  |
+      - objectName: template-sm-name
+        objectType: "secretsmanager"
+        jmesPath:
+        - path: DISPATCHER_BILLING_PLAN_LINK
+          objectAlias: DISPATCHER_BILLING_PLAN_LINK
+        - path: DISPATCHER_DEPLOYMENT_ENV
+          objectAlias: DISPATCHER_DEPLOYMENT_ENV
+        - path: DISPATCHER_LUMS_HOST
+          objectAlias: DISPATCHER_LUMS_HOST
+        - path: DISPATCHER_Platform
+          objectAlias: DISPATCHER_Platform
+        - path: DISPATCHER_REDIS_HOST
+          objectAlias: DISPATCHER_REDIS_HOST
+        - path: DISPATCHER_REDIS_PORT
+          objectAlias: DISPATCHER_REDIS_PORT
+        - path: DISPATCHER_SENTINEL_HOST
+          objectAlias: DISPATCHER_SENTINEL_HOST
+        - path: DISPATCHER_TASK_COMPLETION_CALLBACK_QUEUE
+          objectAlias: DISPATCHER_TASK_COMPLETION_CALLBACK_QUEUE
+        - path: DISPATCHER_AWS_ONPREM
+          objectAlias: DISPATCHER_AWS_ONPREM
+        - path: DISPATCHER_CLOUD_PROVIDER
+          objectAlias: DISPATCHER_CLOUD_PROVIDER
+        - path: DISPATCHER_MAC_QUEUE
+          objectAlias: DISPATCHER_MAC_QUEUE
+        - path: DISPATCHER_SQS_BASE_URL
+          objectAlias: DISPATCHER_SQS_BASE_URL
+        - path: DISPATCHER_ORCHESTRATOR_HOST
+          objectAlias: DISPATCHER_ORCHESTRATOR_HOST
+        - path: DISPATCHER_AWS_ON_PREM_BUCKET
+          objectAlias: DISPATCHER_AWS_ON_PREM_BUCKET
+        - path: DISPATCHER_AWS_DEFAULT_REGION
+          objectAlias: DISPATCHER_AWS_DEFAULT_REGION

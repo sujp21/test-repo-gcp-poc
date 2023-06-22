@@ -1,0 +1,63 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: lns
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "lns"
+  labels:
+    name: "lns"
+spec:
+  selector:
+    matchLabels:
+      name: lns
+  template:
+    metadata:
+      labels:
+        name: lns
+    spec:
+      serviceAccountName: lns
+      containers:
+        - name: "lns"
+          image: "lns:latest"
+          imagePullPolicy: Always
+          env:
+          ports:
+            - containerPort: 9876
+          readinessProbe:
+            failureThreshold: 10
+            httpGet:
+              path: /health
+              port: 9876
+              scheme: HTTP
+            periodSeconds: 10
+            successThreshold: 4
+            timeoutSeconds: 5
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+            requests:
+              memory: 256Mi
+              cpu: 500m
+      terminationGracePeriodSeconds: 1800  # 30 min              
+      imagePullSecrets:
+        - name: hyperexecute-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "lns"
+  labels:
+    name: "lns"
+spec:
+  selector:
+    name: "lns"
+  ports:
+    - port: 80
+      targetPort: 9876
+      protocol: "TCP"
+---

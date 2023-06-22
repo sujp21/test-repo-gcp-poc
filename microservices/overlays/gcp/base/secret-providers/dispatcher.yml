@@ -1,0 +1,20 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: dispatcher-secret-provider-class
+  namespace: hyperexecute
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: gcp
+  parameters:
+    secrets: |
+      - resourceName: "projects/1011757057153/secrets/dispatcher/versions/latest"
+        fileName: ".env"
+  secretObjects:
+    - secretName: dispatcher
+      type: Opaque
+      data:
+        - objectName: .env
+          key: dispatcher
+

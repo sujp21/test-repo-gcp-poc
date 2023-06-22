@@ -1,0 +1,18 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: lns-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: gcp
+  secretObjects:
+    - secretName: lns
+      type: Opaque
+      data:
+        - objectName: .env
+          key: lns
+  parameters:
+    secrets: |
+      - resourceName: "projects/1011757057153/secrets/lns/versions/latest"
+        fileName: ".env"

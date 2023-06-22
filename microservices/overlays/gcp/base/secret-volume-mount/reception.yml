@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reception
+spec:
+  template:
+    spec:
+      containers:
+        - name: reception
+          volumeMounts:
+            - name: reception-volumes
+              mountPath: "/opt/code/.env"
+              subPath: ".env"
+              readOnly: true
+          envFrom:
+            - secretRef:
+                name: reception-secrets
+      volumes:
+        - name: reception-volumes
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "reception-secret-provider-class"

@@ -1,0 +1,96 @@
+---
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: job-artefacts-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: aws
+  secretObjects:
+    - secretName: job-artefacts-secrets
+      type: Opaque
+      data:
+        - objectName: SENTINEL_BEARER_TOKEN
+          key: BEARER_TOKEN
+        - objectName: POSTPROCESSING_HYPERTEST_HOST_URL
+          key: HYPERTEST_HOST_URL
+        - objectName: POSTPROCESSING_LNS_QUEUE_NAME
+          key: LNS_QUEUE_NAME
+        - objectName: POSTPROCESSING_LTMA_API_ENDPOINT
+          key: LTMA_API_ENDPOINT
+        - objectName: POSTPROCESSING_MLD_ENV
+          key: MLD_ENV
+        - objectName: POSTPROCESSING_MLD_LNSPLATFORM
+          key: MLD_LNSPLATFORM
+        - objectName: POSTPROCESSING_MLD_PLATFORM
+          key: MLD_PLATFORM
+        - objectName: POSTPROCESSING_MLD_VERBOSE
+          key: MLD_VERBOSE
+        - objectName: POSTPROCESSING_PROCESS_ARTEFACTS_QUEUE
+          key: PROCESS_ARTEFACTS_QUEUE
+        - objectName: POSTPROCESSING_PROCESS_REPORTS_QUEUE
+          key: PROCESS_REPORTS_QUEUE
+        - objectName: POSTPROCESSING_SENTINEL_API
+          key: SENTINEL_API
+        - objectName: POSTPROCESSING_LOGISTICS_HOST
+          key: LOGISTICS_HOST
+        - objectName: POSTPROCESSING_REDIS_HOST
+          key: REDIS_HOST
+        - objectName: POSTPROCESSING_REDIS_PORT
+          key: REDIS_PORT
+        - objectName: POSTPROCESSING_CLOUD_PROVIDER
+          key: CLOUD_PROVIDER
+        - objectName: POSTPROCESSING_LUMS_AUTH_HOST
+          key: LUMS_AUTH_HOST
+        - objectName: POSTPROCESSING_AWS_DEFAULT_REGION
+          key: AWS_DEFAULT_REGION
+        - objectName: POSTPROCESSING_AWS_ON_PREM_BUCKET
+          key: AWS_ON_PREM_BUCKET
+        - objectName: POSTPROCESSING_ONPREM
+          key: ONPREM
+
+  parameters:
+    objects:  |
+      - objectName: template-sm-name
+        objectType: "secretsmanager"
+        jmesPath:
+        - path: SENTINEL_BEARER_TOKEN
+          objectAlias: SENTINEL_BEARER_TOKEN
+        - path: POSTPROCESSING_HYPERTEST_HOST_URL
+          objectAlias: POSTPROCESSING_HYPERTEST_HOST_URL
+        - path: POSTPROCESSING_LNS_QUEUE_NAME
+          objectAlias: POSTPROCESSING_LNS_QUEUE_NAME
+        - path: POSTPROCESSING_LTMA_API_ENDPOINT
+          objectAlias: POSTPROCESSING_LTMA_API_ENDPOINT
+        - path: POSTPROCESSING_MLD_ENV
+          objectAlias: POSTPROCESSING_MLD_ENV
+        - path: POSTPROCESSING_MLD_LNSPLATFORM
+          objectAlias: POSTPROCESSING_MLD_LNSPLATFORM
+        - path: POSTPROCESSING_MLD_PLATFORM
+          objectAlias: POSTPROCESSING_MLD_PLATFORM
+        - path: POSTPROCESSING_MLD_VERBOSE
+          objectAlias: POSTPROCESSING_MLD_VERBOSE
+        - path: POSTPROCESSING_PROCESS_ARTEFACTS_QUEUE
+          objectAlias: POSTPROCESSING_PROCESS_ARTEFACTS_QUEUE
+        - path: POSTPROCESSING_PROCESS_REPORTS_QUEUE
+          objectAlias: POSTPROCESSING_PROCESS_REPORTS_QUEUE
+        - path: POSTPROCESSING_SENTINEL_API
+          objectAlias: POSTPROCESSING_SENTINEL_API
+        - path: POSTPROCESSING_LOGISTICS_HOST
+          objectAlias: POSTPROCESSING_LOGISTICS_HOST
+        - path: POSTPROCESSING_REDIS_HOST
+          objectAlias: POSTPROCESSING_REDIS_HOST
+        - path: POSTPROCESSING_REDIS_PORT
+          objectAlias: POSTPROCESSING_REDIS_PORT
+        - path: POSTPROCESSING_CLOUD_PROVIDER
+          objectAlias: POSTPROCESSING_CLOUD_PROVIDER
+        - path: POSTPROCESSING_LUMS_AUTH_HOST
+          objectAlias: POSTPROCESSING_LUMS_AUTH_HOST
+        - path: POSTPROCESSING_AWS_DEFAULT_REGION
+          objectAlias: POSTPROCESSING_AWS_DEFAULT_REGION
+        - path: POSTPROCESSING_AWS_ON_PREM_BUCKET
+          objectAlias: POSTPROCESSING_AWS_ON_PREM_BUCKET
+        - path: POSTPROCESSING_ONPREM
+          objectAlias: POSTPROCESSING_ONPREM
+
