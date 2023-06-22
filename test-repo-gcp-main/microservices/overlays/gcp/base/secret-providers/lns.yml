@@ -14,5 +14,5 @@ spec:
           key: lns
   parameters:
     secrets: |
-      - resourceName: "projects/712105902807/lns/versions/latest"
+      - resourceName: "projects/1011757057153/lns/versions/latest"
         fileName: "lns"
