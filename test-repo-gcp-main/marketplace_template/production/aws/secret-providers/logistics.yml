@@ -1,0 +1,80 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: logistics-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: aws
+  secretObjects:
+    - secretName: logistics-secrets
+      type: Opaque
+      data:
+        - objectName: LOGISTICS_MLD_ENV
+          key: MLD_ENV
+        - objectName: SENTINEL_BEARER_TOKEN
+          key: MLD_TOKEN
+        - objectName: LOGISTICS_MLD_VAULT_URL
+          key: MLD_VAULT_URL
+        - objectName: LOGISTICS_MLD_VERBOSE
+          key: MLD_VERBOSE
+        - objectName: LOGISTICS_MLD_VAULT_URL
+          key: MLD_VAULT_URL
+        - objectName: LOGISTICS_REDIS_HOST
+          key: REDIS_HOST
+        - objectName: LOGISTICS_REDIS_PORT
+          key: REDIS_PORT
+        - objectName: LOGISTICS_SENTINEL_API_URL
+          key: SENTINEL_API_URL
+        - objectName: LOGISTICS_LOGS_PLATFORM
+          key: LOGS_PLATFORM
+        - objectName: LOGISTICS_AWS_BUCKET
+          key: AWS_BUCKET
+        - objectName: LOGISTICS_AWS_REGION
+          key: AWS_REGION
+        - objectName: LOGISTICS_AUTOMATION_LOGS_CONTAINER_NAME
+          key: AUTOMATION_LOGS_CONTAINER_NAME
+        - objectName: LOGISTICS_SCENARIO_STORAGE_CONTAINER_NAME
+          key: SCENARIO_STORAGE_CONTAINER_NAME
+        - objectName: LOGISTICS_SCENARIO_STORAGE_PLATFORM
+          key: SCENARIO_STORAGE_PLATFORM
+        - objectName: LOGISTICS_LUMS_BASE_URL
+          key: LUMS_BASE_URL
+        - objectName: LOGISTICS_LOGISTICS_API_URL
+          key: LOGISTICS_API_URL
+  parameters:
+    objects:  |
+      - objectName: template-sm-name
+        objectType: "secretsmanager"
+        jmesPath:
+        - path: LOGISTICS_MLD_ENV
+          objectAlias: LOGISTICS_MLD_ENV
+        - path: SENTINEL_BEARER_TOKEN
+          objectAlias: SENTINEL_BEARER_TOKEN
+        - path: LOGISTICS_MLD_VAULT_URL
+          objectAlias: LOGISTICS_MLD_VAULT_URL
+        - path: LOGISTICS_MLD_VERBOSE
+          objectAlias: LOGISTICS_MLD_VERBOSE
+        - path: LOGISTICS_REDIS_PORT
+          objectAlias: LOGISTICS_REDIS_PORT
+        - path: LOGISTICS_REDIS_HOST
+          objectAlias: LOGISTICS_REDIS_HOST
+        - path: LOGISTICS_SENTINEL_API_URL
+          objectAlias: LOGISTICS_SENTINEL_API_URL
+        - path: LOGISTICS_LOGS_PLATFORM
+          objectAlias: LOGISTICS_LOGS_PLATFORM
+        - path: LOGISTICS_AWS_BUCKET
+          objectAlias: LOGISTICS_AWS_BUCKET
+        - path: LOGISTICS_AWS_REGION
+          objectAlias: LOGISTICS_AWS_REGION
+        - path: LOGISTICS_AUTOMATION_LOGS_CONTAINER_NAME
+          objectAlias: LOGISTICS_AUTOMATION_LOGS_CONTAINER_NAME
+        - path: LOGISTICS_SCENARIO_STORAGE_CONTAINER_NAME
+          objectAlias: LOGISTICS_SCENARIO_STORAGE_CONTAINER_NAME
+        - path: LOGISTICS_SCENARIO_STORAGE_PLATFORM
+          objectAlias: LOGISTICS_SCENARIO_STORAGE_PLATFORM
+        - path: LOGISTICS_LUMS_BASE_URL
+          objectAlias: LOGISTICS_LUMS_BASE_URL
+        - path: LOGISTICS_LOGISTICS_API_URL
+          objectAlias: LOGISTICS_LOGISTICS_API_URL
+

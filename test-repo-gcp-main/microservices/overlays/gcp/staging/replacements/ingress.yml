@@ -1,0 +1,17 @@
+source:
+  kind: ConfigMap
+  name: hyperexecute-env-vars
+  fieldPath: data.API_HOST_NAME
+  version: v1
+targets:
+- select:
+    kind: Ingress
+    name: api-ingress
+  fieldPaths:
+    - spec.tls.0.hosts.0
+- select:
+    kind: Ingress
+    name: api-ingress
+  fieldPaths:
+    - spec.rules.0.host
+

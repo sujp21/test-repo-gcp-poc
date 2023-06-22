@@ -1,0 +1,18 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: logistics-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: gcp
+  secretObjects:
+    - secretName: logistics-secrets
+      type: Opaque
+      data:
+        - objectName: logistics
+          key: logistics
+  parameters:
+    secrets: |
+      - resourceName: "projects/712105902807/logistics/versions/latest"
+        fileName: "logistics"

@@ -1,0 +1,4 @@
+- op: add
+  path: /metadata/annotations
+  value:
+    iam.gke.io/gcp-service-account: sa-gke-common-01@prj-shared-common-srve2.iam.gserviceaccount.com

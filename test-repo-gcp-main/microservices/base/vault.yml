@@ -1,0 +1,84 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: sa-stage-gke@prj-stage-hyperexecute.iam.gserviceaccount.com
+  name: vault
+  namespace: hyperexecute
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "vault"
+  namespace: hyperexecute
+  labels:
+    name: "vault"
+spec:
+  selector:
+    matchLabels:
+      name: vault
+  template:
+    metadata:
+      labels:
+        name: vault
+    spec:
+      serviceAccountName: vault
+      containers:
+        - name: "vault"
+          image: "hyperexecuteonprem.azurecr.io/vault:00f603af43849f6b316e5b395e54a97ea3307200"
+          imagePullPolicy: Always
+          env:
+          volumeMounts: []
+          ports:
+            - containerPort: 9876
+          readinessProbe:
+            failureThreshold: 2
+            httpGet:
+              path: /health
+              port: 9876
+              scheme: HTTP
+            periodSeconds: 3
+            initialDelaySeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: 1000m
+            requests:
+              memory: 256Mi
+              cpu: 500m
+      imagePullSecrets:
+        - name: hyperexecute-pull-secret
+      terminationGracePeriodSeconds: 1800  # 30 min
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "vault"
+  namespace: hyperexecute
+  labels:
+    name: "vault"
+spec:
+  selector:
+    name: "vault"
+  ports:
+    - port: 80
+      targetPort: 9876
+      protocol: "TCP"
+---
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: vault-secret-provider-class
+  namespace: hyperexecute
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: gcp
+  parameters:
+    secrets: |
+      - resourceName: "projects/712105902807/secrets/vault/versions/latest"
+        fileName: ".env"
+---

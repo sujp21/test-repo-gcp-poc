@@ -1,0 +1,135 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: orchestrator-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: aws
+  secretObjects:
+    - secretName: orchestrator-secrets
+      type: Opaque
+      data:
+        - objectName: SENTINEL_BEARER_TOKEN
+          key: BEARER_TOKEN
+        - objectName: ORCHESTRATOR_DEPLOYMENT_ENV
+          key: DEPLOYMENT_ENV
+        - objectName: ORCHESTRATOR_ENABLE_CONCURRENCY_CRON
+          key: ENABLE_CONCURRENCY_CRON
+        - objectName: ORCHESTRATOR_IS_ONPREM_ENABLED
+          key: IS_ONPREM_ENABLED
+        - objectName: ORCHESTRATOR_LINUX_QUEUE
+          key: LINUX_QUEUE
+        - objectName: ORCHESTRATOR_LNS_QUEUE_NAME
+          key: LNS_QUEUE_NAME
+        - objectName: ORCHESTRATOR_LUMS_BASE_URL
+          key: LUMS_BASE_URL
+        - objectName: ORCHESTRATOR_MAC_QUEUE
+          key: MAC_QUEUE
+        - objectName: ORCHESTRATOR_MARSHALLER_DISABLED
+          key: MARSHALLER_DISABLED
+        - objectName: ORCHESTRATOR_MLD_LNSPLATFORM
+          key: MLD_LNSPLATFORM
+        - objectName: ORCHESTRATOR_MLD_QUEUEPLATFORM
+          key: MLD_QUEUEPLATFORM
+        - objectName: ORCHESTRATOR_PROCESS_ARTEFACTS_QUEUE
+          key: PROCESS_ARTEFACTS_QUEUE
+        - objectName: ORCHESTRATOR_PROCESS_REPORTS_QUEUE
+          key: PROCESS_REPORTS_QUEUE
+        - objectName: ORCHESTRATOR_REDIS_HOST
+          key: REDIS_HOST
+        - objectName: ORCHESTRATOR_REDIS_PORT
+          key: REDIS_PORT
+        - objectName: ORCHESTRATOR_SKIP_DELETION_ON_FAILED
+          key: SKIP_DELETION_ON_FAILED
+        - objectName: ORCHESTRATOR_STEWARD_HOST
+          key: STEWARD_HOST
+        - objectName: ORCHESTRATOR_STN_VERBOSE
+          key: STN_VERBOSE
+        - objectName: ORCHESTRATOR_TASK_COMPLETION_CALLBACK_QUEUE
+          key: TASK_COMPLETION_CALLBACK_QUEUE
+        - objectName: ORCHESTRATOR_TUNNEL_BASE_URL
+          key: TUNNEL_BASE_URL
+        - objectName: ORCHESTRATOR_VM_DELETION_CALLBACK_QUEUE
+          key: VM_DELETION_CALLBACK_QUEUE
+        - objectName: ORCHESTRATOR_WINDOWS_QUEUE
+          key: WINDOWS_QUEUE
+        - objectName: ORCHESTRATOR_WINDOWS11_QUEUE
+          key: WINDOWS11_QUEUE
+        - objectName: ORCHESTRATOR_ENABLE_CONCURRENCY_CRON
+          key: ENABLE_CONCURRENCY_CRON
+        - objectName: ORCHESTRATOR_ORG_ID
+          key: ORG_ID
+        - objectName: ORCHESTRATOR_JOB_BULK_ABORT_QUEUE
+          key: JOB_BULK_ABORT_QUEUE
+        - objectName: ORCHESTRATOR_CLOUD_PROVIDER
+          key: CLOUD_PROVIDER
+        - objectName: ORCHESTRATOR_REDIS_KV_EXPIRY_SECONDS
+          key: REDIS_KV_EXPIRY_SECONDS
+        - objectName: ORCHESTRATOR_AWS_ON_PREM_BUCKET
+          key: AWS_ON_PREM_BUCKET
+        - objectName: ORCHESTRATOR_SENTINEL_API_URL
+          key: SENTINEL_API_URL
+  parameters:
+    objects:  |
+      - objectName: template-sm-name
+        objectType: "secretsmanager"
+        jmesPath:
+        - path: SENTINEL_BEARER_TOKEN
+          objectAlias: SENTINEL_BEARER_TOKEN
+        - path: ORCHESTRATOR_DEPLOYMENT_ENV
+          objectAlias: ORCHESTRATOR_DEPLOYMENT_ENV
+        - path: ORCHESTRATOR_ENABLE_CONCURRENCY_CRON
+          objectAlias: ORCHESTRATOR_ENABLE_CONCURRENCY_CRON
+        - path: ORCHESTRATOR_IS_ONPREM_ENABLED
+          objectAlias: ORCHESTRATOR_IS_ONPREM_ENABLED
+        - path: ORCHESTRATOR_LINUX_QUEUE
+          objectAlias: ORCHESTRATOR_LINUX_QUEUE
+        - path: ORCHESTRATOR_LNS_QUEUE_NAME
+          objectAlias: ORCHESTRATOR_LNS_QUEUE_NAME
+        - path: ORCHESTRATOR_LUMS_BASE_URL
+          objectAlias: ORCHESTRATOR_LUMS_BASE_URL
+        - path: ORCHESTRATOR_MAC_QUEUE
+          objectAlias: ORCHESTRATOR_MAC_QUEUE
+        - path: ORCHESTRATOR_MARSHALLER_DISABLED
+          objectAlias: ORCHESTRATOR_MARSHALLER_DISABLED
+        - path: ORCHESTRATOR_MLD_LNSPLATFORM
+          objectAlias: ORCHESTRATOR_MLD_LNSPLATFORM
+        - path: ORCHESTRATOR_MLD_QUEUEPLATFORM
+          objectAlias: ORCHESTRATOR_MLD_QUEUEPLATFORM
+        - path: ORCHESTRATOR_PROCESS_ARTEFACTS_QUEUE
+          objectAlias: ORCHESTRATOR_PROCESS_ARTEFACTS_QUEUE
+        - path: ORCHESTRATOR_PROCESS_REPORTS_QUEUE
+          objectAlias: ORCHESTRATOR_PROCESS_REPORTS_QUEUE
+        - path: ORCHESTRATOR_REDIS_HOST
+          objectAlias: ORCHESTRATOR_REDIS_HOST
+        - path: ORCHESTRATOR_REDIS_PORT
+          objectAlias: ORCHESTRATOR_REDIS_PORT
+        - path: ORCHESTRATOR_SKIP_DELETION_ON_FAILED
+          objectAlias: ORCHESTRATOR_SKIP_DELETION_ON_FAILED
+        - path: ORCHESTRATOR_STEWARD_HOST
+          objectAlias: ORCHESTRATOR_STEWARD_HOST
+        - path: ORCHESTRATOR_STN_VERBOSE
+          objectAlias: ORCHESTRATOR_STN_VERBOSE
+        - path: ORCHESTRATOR_TASK_COMPLETION_CALLBACK_QUEUE
+          objectAlias: ORCHESTRATOR_TASK_COMPLETION_CALLBACK_QUEUE
+        - path: ORCHESTRATOR_TUNNEL_BASE_URL
+          objectAlias: ORCHESTRATOR_TUNNEL_BASE_URL
+        - path: ORCHESTRATOR_VM_DELETION_CALLBACK_QUEUE
+          objectAlias: ORCHESTRATOR_VM_DELETION_CALLBACK_QUEUE
+        - path: ORCHESTRATOR_WINDOWS_QUEUE
+          objectAlias: ORCHESTRATOR_WINDOWS_QUEUE
+        - path: ORCHESTRATOR_WINDOWS11_QUEUE
+          objectAlias: ORCHESTRATOR_WINDOWS11_QUEUE
+        - path: ORCHESTRATOR_ORG_ID
+          objectAlias: ORCHESTRATOR_ORG_ID
+        - path: ORCHESTRATOR_JOB_BULK_ABORT_QUEUE
+          objectAlias: ORCHESTRATOR_JOB_BULK_ABORT_QUEUE
+        - path: ORCHESTRATOR_CLOUD_PROVIDER
+          objectAlias: ORCHESTRATOR_CLOUD_PROVIDER
+        - path: ORCHESTRATOR_REDIS_KV_EXPIRY_SECONDS
+          objectAlias: ORCHESTRATOR_REDIS_KV_EXPIRY_SECONDS
+        - path: ORCHESTRATOR_AWS_ON_PREM_BUCKET
+          objectAlias: ORCHESTRATOR_AWS_ON_PREM_BUCKET
+        - path: ORCHESTRATOR_SENTINEL_API_URL
+          objectAlias: ORCHESTRATOR_SENTINEL_API_URL

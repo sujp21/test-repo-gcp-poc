@@ -1,0 +1,25 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: steward
+spec:
+  template:
+    spec:
+      containers:
+        - name: steward
+          volumeMounts:
+            - name: steward-volumes
+              mountPath: "/opt/code/.env"
+              subPath: ".env"
+              readOnly: true
+          envFrom:
+            - secretRef:
+                name: steward-secrets
+      volumes:
+        - name: steward-volumes
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: "steward-secret-provider-class"

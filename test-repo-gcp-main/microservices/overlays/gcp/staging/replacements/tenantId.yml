@@ -1,0 +1,10 @@
+source:
+  kind: ConfigMap
+  name: hyperexecute-env-vars
+  fieldPath: data.TENANT_ID
+  version: v1
+targets:
+- select:
+    kind: SecretProviderClass
+  fieldPaths:
+    - spec.parameters.tenantId

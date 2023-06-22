@@ -1,0 +1,18 @@
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: orchestrator-secret-provider-class
+  labels:
+    type: "microservice-secret"
+spec:
+  provider: gcp
+  secretObjects:
+    - secretName: orchestrator-secrets
+      type: Opaque
+      data:
+        - objectName: orchestrator
+          key: orchestrator
+  parameters:
+    secrets: |
+      - resourceName: "projects/712105902807/orchestrator/versions/latest"
+        fileName: "orchestrator"
