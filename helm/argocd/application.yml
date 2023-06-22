@@ -29,5 +29,4 @@ spec:
     syncOptions:
     - CreateNamespace=true
     automated:
-      # selfHeal: true  # sync with remote repository
-      prune: true # if delete yaml file on repo, then argocd will also delete it
+      prune: true 
