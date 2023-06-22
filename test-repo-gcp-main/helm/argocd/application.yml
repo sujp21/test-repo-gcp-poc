@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:sujp21/test-repo-gcp.git
+    repoURL: git@github.com:sujp21/test-repo-gcp-poc.git
     targetRevision: HEAD
     path: microservices/overlays/gcp/staging/
     plugin:
