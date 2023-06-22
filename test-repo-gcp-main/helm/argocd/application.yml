@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hyperexecute-test
+  name: hyperexecute
   namespace: argocd
 spec:
   project: default
@@ -23,7 +23,7 @@ spec:
           value: asia-south1
   destination: 
     server: https://kubernetes.default.svc
-    namespace: hyperexecute-test
+    namespace: hyperexecute
 
   syncPolicy:
     syncOptions:
