@@ -16,7 +16,7 @@ spec:
         - name: API_HOST_NAME
           value: apiHost
         - name: PROJECT_ID
-          value: prj-stage-hyperexecute
+          value: prj-prod-poc-hyperexecute-01
         - name: VAULT_NAME
           value: vault
         - name: GCP_REGION
