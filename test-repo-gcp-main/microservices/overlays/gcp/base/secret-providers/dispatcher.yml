@@ -14,5 +14,5 @@ spec:
           key: dispatcher
   parameters:
     secrets: |
-      - resourceName: "projects/712105902807/dispatcher/versions/latest"
+      - resourceName: "projects/1011757057153/dispatcher/versions/latest"
         fileName: "dispatcher"
