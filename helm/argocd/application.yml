@@ -10,6 +10,7 @@ spec:
     targetRevision: HEAD
     path: microservices/overlays/gcp/staging/
     plugin:
+      # For either argocd-cm- or sidecar-installed CMPs, you can pass environment variables to the CMP.
       name: kustom-plugin
       env:
         - name: API_HOST_NAME
@@ -23,8 +24,10 @@ spec:
   destination: 
     server: https://kubernetes.default.svc
     namespace: hyperexecute
-syncPolicy:
-  syncOptions:
+
+  syncPolicy:
+    syncOptions:
     - CreateNamespace=true
-  automated:
-    prune: true
+    automated:
+      # selfHeal: true  # sync with remote repository
+      prune: true # if delete yaml file on repo, then argocd will also delete it
