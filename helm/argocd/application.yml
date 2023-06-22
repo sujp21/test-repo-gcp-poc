@@ -27,6 +27,6 @@ spec:
 
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+    - createNamespace=true
     automated:
       prune: true 
