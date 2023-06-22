@@ -14,5 +14,5 @@ spec:
           key: logistics
   parameters:
     secrets: |
-      - resourceName: "projects/712105902807/logistics/versions/latest"
+      - resourceName: "projects/1011757057153/logistics/versions/latest"
         fileName: "logistics"
